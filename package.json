@@ -1,0 +1,24 @@
+{
+  "name": "future-date-range-calendar",
+  "version": "1.0.0",
+  "description": "React Native calendar to pick future date ranges only",
+  "main": "lib/index.js",                
+  "types": "lib/index.d.ts",             
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/future-date-range-calendar.git"
+  },
+  "keywords": [
+    "react-native",
+    "calendar",
+    "date-picker",
+    "future",
+    "range"
+  ],
+  "author": "MD Israr",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-native": ">=0.63.0"
+  }
+}
