@@ -47,7 +47,7 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
 
   const cardWidth = props?.width ?? Dimensions.get("screen").width
   
-  const {calendarType = 'type1'} = props
+  const {calendarType = 'type1', horizontal=true} = props
 
   const handlePrev = () => {
     if (currentIndex > 0) {
@@ -359,7 +359,7 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
             <View style={styles.currentMonthHeaderWrapper}>
               <TouchableOpacity onPress={handlePrev}>
                 {
-                  props?.horizontal ? 
+                  horizontal ? 
                     props?.renderPreviousIcon ? props?.renderPreviousIcon : <LeftChevron/>
                   : null
                 }
@@ -371,7 +371,7 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
               />
               <TouchableOpacity onPress={handleNext}>
                 {
-                  props?.horizontal ? 
+                  horizontal ? 
                     props?.renderNextIcon ? props?.renderNextIcon : <RightChevron/>
                   : null
                 }
@@ -515,7 +515,7 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
   return (
     <>
     {
-      props?.horizontal?
+      horizontal?
       <FlatList
       ref={flatListRef}
       onScroll={handleScroll}

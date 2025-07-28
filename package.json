@@ -1,6 +1,6 @@
 {
   "name": "react-native-future-date-range-calendar",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "React Native calendar to pick future date ranges only",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

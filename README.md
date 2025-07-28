@@ -57,7 +57,7 @@ export default function App() {
 | -------------------------------- | ---------------------------------- | ---------------------------------------------------- | --------------------- |
 | `width`                          | `number`                           | Width of the calendar view                           | `device size`    |
 | `calendarType`                   | `"type1"` \| `"type2"`             | Calendar display layout type                         | `"type1"`             |
-| `horizontal`                     | `boolean`                          | Renders calendar in horizontal scroll                | `false`               |
+| `horizontal`                     | `boolean`                          | Renders calendar in horizontal scroll                | `true`               |
 | `dayCustomStyle`                 | `ViewStyle`                        | Custom style for each day cell                       | `undefined`           |
 | `weekDaysCustomStyle`            | `ViewStyle`                        | Style for the week days container                    | `undefined`           |
 | `weekDayCustomStyle`             | `ViewStyle`                        | Individual week day style (Mon, Tue...)              | `undefined`           |
@@ -83,10 +83,6 @@ export default function App() {
 | `onDateSelect`                   | `({ startDate, endDate }) => void` | Callback with selected date range                    | `undefined`           |
 
 
-
-## 🧪 Example App
-
-A fully working example is available in the `example/` directory.
 
 ## 🎨 Customization
 
