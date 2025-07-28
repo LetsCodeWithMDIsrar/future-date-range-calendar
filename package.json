@@ -1,9 +1,20 @@
 {
-  "name": "future-date-range-calendar",
+  "name": "react-native-future-date-range-calendar",
   "version": "1.0.0",
   "description": "React Native calendar to pick future date ranges only",
-  "main": "lib/index.js",                
-  "types": "lib/index.d.ts",             
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc && npm run copy-assets",
+    "copy-assets": "cpx \"src/**/*.png\" lib",
+    "prepare": "npm run build"
+  },
+  "files": [
+    "lib",
+    "src/icons/left-chevron/left-chevron.png",
+    "src/icons/right-chevron/right-chevron.png",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/LetsCodeWithMDIsrar/future-date-range-calendar"
@@ -20,5 +31,14 @@
   "peerDependencies": {
     "react": ">=17.0.0",
     "react-native": ">=0.63.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-native": "^0.72.8",
+    "cpx": "^1.5.0",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "moment": "^2.30.1"
   }
 }

@@ -215,7 +215,7 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
   const date = new Date();
   const currYear = date.getFullYear();
   const currMonth = date.getMonth();
-  const days: DateTypes = {
+  const days: DateTypes | any = {
     previousMonth: [{date: 0, month: 0, year: 0}],
     currentMonth: [
       {
@@ -406,7 +406,7 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
                 );
               })}
               {/* Current Month's Days */}
-              {days.currentMonth.map((v, i) => {
+              {days.currentMonth.map((v:any, i:number) => {
                 let fd = v.firstDayOfTheMonth;
                 fd = Math.abs(fd - 7) - 1;
                 const ld = v.lastDateOfTheMonth - 1;
