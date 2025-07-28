@@ -90,12 +90,12 @@ You can easily style and theme the calendar using the available props. Customize
 
     Number of months to show
 
-## 📅 License
-
-MIT © [MD Israr]
-
 
 ## 🙌 Contributing
 
 Pull requests and suggestions are welcome!
 Feel free to file an issue if you find a bug or need a feature.
+
+## 📅 License
+
+MIT
