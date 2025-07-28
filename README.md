@@ -38,11 +38,11 @@ yarn add react-native-future-date-range-calendar
 ## 📦 Usage
 
 ```bash
-import { CalendarView } from 'react-native-future-date-range-calendar';
+import { FutureDateRangeCalendar } from 'react-native-future-date-range-calendar';
 
 export default function App() {
   return (
-    <CalendarView
+    <FutureDateRangeCalendar
       onDateSelect={({ startDate, endDate }) => {
         console.log('Selected Range:', startDate, endDate);
       }}
