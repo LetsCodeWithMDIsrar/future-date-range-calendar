@@ -15,7 +15,7 @@ A customizable and lightweight **future date range picker** for React Native. Th
   <img src="./src/assets/ios-h2.png" width="22%" />
 </p>
 
-## 🔄 Type 2 Calendar (Vertical)
+## 📆 Type 2 Calendar (Vertical)
 
 <p align="center">
   <img src="./src/assets/android-v1.png" width="22%" />
