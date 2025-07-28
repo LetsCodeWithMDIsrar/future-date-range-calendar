@@ -6,6 +6,7 @@
     "jsx": "react",
     "declaration": true,
     "declarationDir": "lib",
+    "emitDeclarationOnly": false,
     "outDir": "lib",
     "strict": true,
     "moduleResolution": "node",
