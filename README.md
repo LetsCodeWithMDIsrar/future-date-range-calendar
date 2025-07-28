@@ -6,17 +6,23 @@ A customizable and lightweight **future date range picker** for React Native. Th
 ## 🖼 Screenshots
 
 ---
-## 📆 Type 1 Calendar
-![Calendar Type 1 Android 1](./src/assets/android-v1.png)
-![Calendar Type 1 Android 2](./src/assets/android-v2.png)
-![Calendar Type 1 iOS 1](./src/assets/ios-v1.png)
-![Calendar Type 1 iOS 2](./src/assets/ios-v2.png)
+## 📆 Type 1 Calendar (Horizontal)
 
-## 🔄 Type 2 Calendar (Horizontal)
-![Calendar Type 2 Android 1](./src/assets/android-h1.png)
-![Calendar Type 2 Android 2](./src/assets/android-h2.png)
-![Calendar Type 2 iOS 1](./src/assets/ios-h1.png)
-![Calendar Type 2 iOS 2](./src/assets/ios-h2.png)
+<p align="center">
+  <img src="./src/assets/android-h1.png" width="22%" />
+  <img src="./src/assets/android-h2.png" width="22%" />
+  <img src="./src/assets/ios-h1.png" width="22%" />
+  <img src="./src/assets/ios-h2.png" width="22%" />
+</p>
+
+## 🔄 Type 2 Calendar (Vertical)
+
+<p align="center">
+  <img src="./src/assets/android-v1.png" width="22%" />
+  <img src="./src/assets/android-v2.png" width="22%" />
+  <img src="./src/assets/ios-v1.png" width="22%" />
+  <img src="./src/assets/ios-v2.png" width="22%" />
+</p>
 
 ---
 
