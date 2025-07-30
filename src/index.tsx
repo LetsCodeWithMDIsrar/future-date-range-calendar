@@ -35,8 +35,8 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
   const [selectedDate, setSelectedDate] = React.useState('');
   const [disableDays, setDisableDays]: any = React.useState([]);
   const initialDate = moment().format("YYYY-MM-DD");
-  const [checkInDate, setCheckInDate] = React.useState(moment().format("YYYY-MM-DD"))
-  const [checkOutDate, setCheckOutDate] = React.useState(moment().add("days", 2).format("YYYY-MM-DD"))
+  const [startDate, setStartDate] = React.useState(moment().format("YYYY-MM-DD"))
+  const [endDate, setEndDate] = React.useState(moment().add("days", 2).format("YYYY-MM-DD"))
   const [dateSelected, setDateSelected] = React.useState(false);
   const flatListRef:any = React.useRef(null);
   const [currentIndex, setCurrentIndex] = React.useState(0);
@@ -47,7 +47,7 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
 
   const cardWidth = props?.width ?? Dimensions.get("screen").width
   
-  const {calendarType = 'type1', horizontal=true} = props
+  const {calendarType = 'type1'} = props
 
   const handlePrev = () => {
     if (currentIndex > 0) {
@@ -105,51 +105,51 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
   }
   const dateRangeHandler = (date: any) => {
     
-    if(date==checkInDate){
+    if(date==startDate){
       return
     }
-    if (checkInDate === '') {
-      setCheckInDate(date);
+    if (startDate === '') {
+      setStartDate(date);
       /** this method is handling onDateSelect props
        * with the help of this props user can access startDate and endDate timestamp
        */
       onDateSelect(date, '')
     }
 
-    const d1 = new Date(checkInDate);
+    const d1 = new Date(startDate);
     const d2 = new Date(date);
 
-    if (!props?.disablePreviousDateSelection && checkInDate !== '' && d1 > d2) {
-      setCheckInDate(date);
-      setCheckOutDate('');
+    if (!props?.disablePreviousDateSelection && startDate !== '' && d1 > d2) {
+      setStartDate(date);
+      setEndDate('');
        /** this method is handling onDateSelect props
        * with the help of this props user can access startDate and endDate timestamp
        */
       onDateSelect(date, '')
-    } else if (checkInDate !== '' && checkOutDate === '') {
-      setCheckOutDate(date);
+    } else if (startDate !== '' && endDate === '') {
+      setEndDate(date);
        /** this method is handling onDateSelect props
        * with the help of this props user can access startDate and endDate timestamp
        */
-      onDateSelect(checkInDate, date)
+      onDateSelect(startDate, date)
     } else if (
-      checkInDate !== '' &&
-      checkOutDate !== '' &&
+      startDate !== '' &&
+      endDate !== '' &&
       props.disablePreviousDateSelection &&
       d2 > d1
     ) {
-      setCheckOutDate(date);
+      setEndDate(date);
       /** this method is handling onDateSelect props
        * with the help of this props user can access startDate and endDate timestamp
        */
-      onDateSelect(checkInDate, date)
+      onDateSelect(startDate, date)
     }else if(
-      checkInDate !== '' &&
-      checkOutDate !== '' &&
+      startDate !== '' &&
+      endDate !== '' &&
       d2 > d1
     ){
-      setCheckInDate(date);
-      setCheckOutDate('');
+      setStartDate(date);
+      setEndDate('');
       /** this method is handling onDateSelect props
        * with the help of this props user can access startDate and endDate timestamp
        */
@@ -313,7 +313,9 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
       days.nextMonth.push(data);
     }
     const getSelectedDatesStyle = (runningDate:string)=>{
-      if(runningDate === checkInDate || runningDate === checkOutDate){
+      const dayNumber = moment(runningDate, "YYYY-MM-DD").day()
+      const day0Style = dayNumber === 0 ? {left:10} : {}
+      if(runningDate === startDate || runningDate === endDate){
         if(calendarType=="type1"){
           if(props?.startAndEndDateBackgroundColor){
             return {...styles.daySelectedWrapperFirstAndLasType1, backgroundColor:props.startAndEndDateBackgroundColor}
@@ -328,19 +330,19 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
       }else{
         if(calendarType=="type1"){
           if(props?.rangeDaysBackgroundColor){
-            return {...styles.daySelectedWrapperType1, backgroundColor:props?.rangeDaysBackgroundColor}
+            return {...styles.daySelectedWrapperType1, ...day0Style, backgroundColor:props?.rangeDaysBackgroundColor}
           }
-          return styles.daySelectedWrapperType1
+          return {...styles.daySelectedWrapperType1, ...day0Style}
         }else{
           if(props?.rangeDaysBackgroundColor){
             return {...styles.daySelectedWrapperType2, backgroundColor:props?.rangeDaysBackgroundColor}
           }
-          return styles.daySelectedWrapperType2
+          return {...styles.daySelectedWrapperType2}
         }
       }
     }
     const getSelectedDatesTextStyle = (runningDate:string)=>{
-      if(runningDate === checkInDate || runningDate === checkOutDate){
+      if(runningDate === startDate || runningDate === endDate){
         if(props?.startAndEndDateTextColor){
           return {...styles.daySelectedTextFirstAndLast, color:props?.startAndEndDateTextColor}
         }
@@ -352,6 +354,19 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
         return styles.daySelectedText
       }
     }
+    const getStartEndDateBaseStyle = (runningDate:string)=>{
+      const dayNumber = moment(runningDate, "YYYY-MM-DD").day()
+      const day0Style = dayNumber === 0 ? {width:0} : {}
+      if(runningDate === startDate && endDate){
+        return styles.startDateBase
+      }
+      if(runningDate === endDate){
+        return {...styles.endDateBase, ...day0Style}
+      }
+      if(props?.rangeDaysBackgroundColor){
+        return {backgroundColor:props?.rangeDaysBackgroundColor}
+      }
+    }
     return (
       <View style={{width:cardWidth, backgroundColor:colors.white}}>
         <View style={styles.calendarWrapper}>
@@ -359,7 +374,7 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
             <View style={styles.currentMonthHeaderWrapper}>
               <TouchableOpacity onPress={handlePrev}>
                 {
-                  horizontal ? 
+                  props?.horizontal ? 
                     props?.renderPreviousIcon ? props?.renderPreviousIcon : <LeftChevron/>
                   : null
                 }
@@ -371,7 +386,7 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
               />
               <TouchableOpacity onPress={handleNext}>
                 {
-                  horizontal ? 
+                  props?.horizontal ? 
                     props?.renderNextIcon ? props?.renderNextIcon : <RightChevron/>
                   : null
                 }
@@ -394,14 +409,10 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
             <View style={styles.daysWrapper}>
               {/* Pevious Month's Days */}
               {days.previousMonth.map((v: any, i: any) => {
-                const borderRightWidth = {
-                  // borderRightWidth:
-                  //   i === Object.keys(days.previousMonth).length - 1 ? 0.5 : 0,
-                };
                 return (
                   <View
                     key={i}
-                    style={[styles.dayWrapperPrevious, borderRightWidth]}
+                    style={[styles.dayWrapperPrevious]}
                   />
                 );
               })}
@@ -409,7 +420,6 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
               {days.currentMonth.map((v:any, i:number) => {
                 let fd = v.firstDayOfTheMonth;
                 fd = Math.abs(fd - 7) - 1;
-                const ld = v.lastDateOfTheMonth - 1;
 
                 const runningDate =
                   v.year +
@@ -417,29 +427,18 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
                   (v.month < 10 ? '0' + v.month : v.month) +
                   '-' +
                   (v.date < 10 ? '0' + v.date : v.date);
-                const borderRightWidth = {
-                  // borderRightWidth:
-                  //   i === fd ||
-                  //   i === fd + 7 * 1 ||
-                  //   i === fd + 7 * 2 ||
-                  //   i === fd + 7 * 3 ||
-                  //   i === fd + 7 * 4 ||
-                  //   i === ld
-                  //     ? 0
-                  //     : 0.5,
-                };
                 const rDate = new Date(runningDate);
-                const sDate = new Date(checkInDate);
-                const eDate = new Date(checkOutDate);
+                const sDate = new Date(startDate);
+                const eDate = new Date(endDate);
 
                 return (
-                  <View key={i} style={[styles.dayWrapper, borderRightWidth, props?.dayCustomStyle]}>
+                  <View key={i} style={[styles.dayWrapper, props?.dayCustomStyle]}>
                     <React.Fragment key={i}>
                       {((rDate >= sDate && rDate <= eDate) ||
-                        runningDate === checkInDate) && (
+                        runningDate === startDate) && (
                           <>
                           {
-                            calendarType == "type1" && <View style={[(runningDate === checkInDate && checkOutDate) && styles.startDateBase, runningDate === checkOutDate && styles.endDateBase, props?.rangeDaysBackgroundColor ? {backgroundColor:props?.rangeDaysBackgroundColor} : {}]}/>
+                            calendarType == "type1" && <View style={getStartEndDateBaseStyle(runningDate)}/>
                           }
                           <TouchableOpacity
                             activeOpacity={1}
@@ -515,7 +514,7 @@ export const FutureDateRangeCalendar: React.FC<CalendarViewProps> = React.memo((
   return (
     <>
     {
-      horizontal?
+      props?.horizontal?
       <FlatList
       ref={flatListRef}
       onScroll={handleScroll}
